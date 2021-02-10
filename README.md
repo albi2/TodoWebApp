@@ -57,6 +57,7 @@ A todo website built with react and redux to help you track your daily tasks usi
 
 ## Tasks
 - [ ] Add to do items
+  - [ ] Add to do items
 - [ ] Add map functionality for user to specify places where he wants to study
 - [ ] Add react-spring effect
 - [ ] Add timer using react-compound-timer package
