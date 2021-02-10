@@ -54,3 +54,10 @@ A todo website built with react and redux to help you track your daily tasks usi
 │       └── Home.js
 └── yarn.lock
 ```
+
+## Tasks
+-[] Add timer functionality
+-[] Add spring effects
+-[] Add the todo items on the list
+-[] Add map for user to specify places to study
+
