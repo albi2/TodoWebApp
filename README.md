@@ -13,3 +13,9 @@ A todo website built with react and redux to help you track your daily tasks usi
  npm install
  yarn start
  ```
+
+## What's included
+* Redux Store
+* React-Spring effects
+* React Components
+* Timer 
