@@ -22,9 +22,35 @@ A todo website built with react and redux to help you track your daily tasks usi
 
 ### Folder Structure
 
-```
-.
-|-
-| 
-
+```bash
+├── package-lock.json
+├── package.json
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+├── src
+│   ├── ActionTypes.js
+│   ├── App.css
+│   ├── App.js
+│   ├── ConfigureStore.js
+│   ├── components
+│   │   ├── Main
+│   │   ├── Modals
+│   │   ├── Navbar
+│   │   ├── Sidebar
+│   │   └── Timer
+│   ├── features
+│   │   ├── projects
+│   │   ├── sessions
+│   │   └── todos
+│   ├── images
+│   ├── index.css
+│   ├── index.js
+│   └── pages
+│       └── Home.js
+└── yarn.lock
 ```
