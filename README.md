@@ -22,7 +22,7 @@ A todo website built with react and redux to help you track your daily tasks usi
 
 ### Folder Structure
 
-
+```
 .
 +-- _config.yml
 +-- _drafts
@@ -42,3 +42,4 @@ A todo website built with react and redux to help you track your daily tasks usi
 +-- _site
 +-- index.html
 
+```
