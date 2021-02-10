@@ -19,3 +19,6 @@ A todo website built with react and redux to help you track your daily tasks usi
 * React-Spring effects
 * React Components
 * Timer 
+
+### Folder Structure
+|---
