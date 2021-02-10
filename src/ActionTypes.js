@@ -1,0 +1,11 @@
+export const TODO_ADDED = 'todos/todoAdded';
+export const TODO_TOGGLED = 'todos/todoToggled';
+export const TODO_PROJECT_SELECTED = 'todos/projectSelected';
+export const TODO_DELETED = 'todos/todoDeleted';
+export const TODO_SET_DATE = 'todos/setDate';
+export const PROJECT_ADDED = 'projects/projectAdded';
+export const PROJECT_DELETED = 'projects/projectDeleted';
+export const PROJECT_COLOR_CHANGED = 'projects/colorChanged';
+export const PROJECT_COMPLETED = 'project/projectCompleted';
+export const SESSION_ADDED = 'sessions/sessionAdded';
+export const SESSION_DELETED = 'sessions/sessionDeleteed';

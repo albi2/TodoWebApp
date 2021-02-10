@@ -1,24 +1,50 @@
-import logo from './logo.svg';
+
+import Reac, { useEffect} from 'react';
+import Home from './pages/Home.js';
+import { Route,Switch, Redirect} from 'react-router-dom'
+import { useSelector,  useDispatch } from 'react-redux';
+import {projectAdded,Colors as ColorPalette} from './features/projects/projectsSlice.js';
+import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 
 function App() {
+
+  const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(projectAdded(
+        1,
+        'Databases',
+        ColorPalette.navyBlue,
+        false
+        ));
+        dispatch(projectAdded(
+            2,
+            'Operating Systems',
+            ColorPalette.lightorange,
+            false
+            ));
+        dispatch(projectAdded(
+            3,
+            'Theory Of Computation',
+            ColorPalette.skyblue,
+            false
+            ));
+
+        dispatch(projectAdded(
+            4,
+            'Physics',
+            ColorPalette.forestgreen,
+            false
+            ));
+    })
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Switch>
+        <Route path="/home" component={Home} />
+        <Redirect to="/home" />
+      </Switch>
+    </>
   );
 }
 
