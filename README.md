@@ -21,4 +21,17 @@ A todo website built with react and redux to help you track your daily tasks usi
 * Timer 
 
 ### Folder Structure
-|---
+
+```javascript
+var routes = {
+   <Route name="App">
+    <Route name="Admin">
+      <Route name="Users"/>
+      <Route name="Reports"/>
+    </Route>
+    <Route name="Course">
+      <Route name="Assignments"/>
+    </Route>
+  </Route>
+}
+```
