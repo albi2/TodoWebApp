@@ -22,7 +22,7 @@ A todo website built with react and redux to help you track your daily tasks usi
 
 ### Folder Structure
 
-```javascript
+
 var routes = {
    <Route name="App">
     <Route name="Admin">
@@ -34,4 +34,4 @@ var routes = {
     </Route>
   </Route>
 }
-```
+
