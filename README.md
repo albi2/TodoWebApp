@@ -1,4 +1,15 @@
 
-## Todo Web App 
+# Todo Web App 
 
-### A website where you can manage your daily tasks and the time you spend working.This web app is based on the pomodoro working strategy and helps you keep track of your work.
+A todo website built with react and redux to help you track your daily tasks using the pomodoro technique.
+
+## How To Run
+ * Clone the repository
+ * Install dependencies
+ * Run the project
+ 
+ ```
+ git clone https://github.com/Artemis-12/Todo-Webapp/tree/master
+ npm install
+ yarn start
+ ```
