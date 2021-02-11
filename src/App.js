@@ -1,8 +1,8 @@
 
-import Reac, { useEffect} from 'react';
+import React, { useEffect} from 'react';
 import Home from './pages/Home.js';
 import { Route,Switch, Redirect} from 'react-router-dom'
-import { useSelector,  useDispatch } from 'react-redux';
+import {  useDispatch } from 'react-redux';
 import {projectAdded,Colors as ColorPalette} from './features/projects/projectsSlice.js';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';

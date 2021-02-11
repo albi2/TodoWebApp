@@ -7,7 +7,7 @@ import { Sidebar } from '../components/Sidebar/index.js';
 import { Colors } from '../components/Navbar/NavbarElements.js';
 import ProjectModal from '../components/Modals/AddProjectModal.js';
 import Body from '../components/Main/index.js'; 
-
+import { Route, Switch,Redirect, useRouteMatch } from 'react-router-dom';
 const HomeContainer = styled.div`
     position: relative;
 `
@@ -56,15 +56,17 @@ const Home = () => {
         toggleSelectedProject(id);
     });
     
-    const [chosenMenu, setChosenMenu] = useState('Today');
-
+    const {path, url} = useRouteMatch();
     return (
         <HomeContainer onClick={changeProjectPopup}>
             <Navbar toggleModal={toggleModal} />
             <BodyContainer>
                 <Sidebar  togglePopup={changeProjectPopup} toggleProjectModal={toggleAddProject} 
-                chosenMenu={chosenMenu} setChosenMenu={setChosenMenu}/>
-                <Body chosenMenu={chosenMenu}/>
+                />
+                <Switch>
+                    <Route  path={`${url}/:menu`} component={() => <Body />} />
+                    <Redirect to={`${path}/Today`} />
+                </Switch>
             </BodyContainer>
             <SignModal showModal={showSignModal} toggleModal={toggleModal}/>
             <ProjectPopup isPopupOpen={isProjectPopupOpen} xPos={xPos} yPos={yPos} 

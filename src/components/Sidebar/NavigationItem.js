@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Colors } from '../Navbar/NavbarElements.js';
+import { useRouteMatch } from 'react-router-dom';
 
 // const ItemBox = styled.div`
 //     display: flex;
@@ -51,10 +52,10 @@ const InfoItem = styled.span`
     text-wrap: nowrap;
 `
 
-const NavigationItem = ({icon, itemName, hours, noItems, togglePopup,id,chosenMenu, setChosenMenu}) => {
+const NavigationItem = ({icon, itemName, hours, noItems, togglePopup,id}) => {
+    const { path,url} = useRouteMatch();
     return (
-        <ItemBox to={`home/${chosenMenu}`} 
-            onClick={() => setChosenMenu(itemName)}
+        <ItemBox to={`${url}/${itemName}`} 
          onContextMenu={togglePopup} id={id}>
             <IconDiv>
                 {icon}

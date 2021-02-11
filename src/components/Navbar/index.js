@@ -4,15 +4,18 @@ NavbarMenu, NavItem, NavUserIcon, SignInUp } from './NavbarElements'
 import { IoIosNotificationsOutline } from 'react-icons/io';
 import { SiGooglemaps } from 'react-icons/si';
 import { IoSettingsOutline } from 'react-icons/io5';
+import {useRouteMatch} from 'react-router-dom';
 
 const Navbar = ({toggleModal}) => {
+    const {path, url} = useRouteMatch();
+
     return (
         <>
             <Nav>
                 <NavbarContainer>
-                    <NavSignInUp onClick={toggleModal}>
+                    <NavSignInUp to={`${url}/signin`} onClick={toggleModal}>
                         <NavUserIcon />
-                        <SignInUp to="/home/signin">Sign In | Sign Up</SignInUp>
+                        <SignInUp >Sign In | Sign Up</SignInUp>
                     </NavSignInUp>
                     <NavbarMenu>
                         <NavItem>

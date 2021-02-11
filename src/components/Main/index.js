@@ -2,13 +2,15 @@ import React,{useState,createRef} from 'react'
 import { BodyContainer } from './MainElements.js';
 import StatsBar from './StatsBar.js';
 import InputComponent from './InputComponent.js';
+import {useParams} from 'react-router-dom';
+import TodosComponent from './TodosComponent.js';
 
-const Body = ({chosenMenu}) => {
+const Body = () => {
+    const {menu} = useParams();
     const [inputFocused, setInputFocused] = useState(false);
     const [pomodoros, setPomodoros] = useState(0);
 
     const ref = createRef();
-
     const handleClick = function(e){
         if(e.target !== ref.current){
             setInputFocused(() => false);
@@ -16,13 +18,16 @@ const Body = ({chosenMenu}) => {
         }
     }
     return (
+
             <BodyContainer onClick={handleClick}>
                 <StatsBar />
                 <InputComponent ref={ref} inputFocused={inputFocused} 
                 setInputFocused={setInputFocused} 
                 pomodoros={pomodoros}
                 setPomodoros={setPomodoros}
-                chosenMenu={chosenMenu}/>
+                chosenMenu={menu}
+                />
+                <TodosComponent chosenMenu={menu}/>
             </BodyContainer>
     )
 }

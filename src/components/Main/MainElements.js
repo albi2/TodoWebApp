@@ -8,5 +8,6 @@ export const BodyContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    overflow: scroll;
 `
 

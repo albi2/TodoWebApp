@@ -5,6 +5,7 @@ import { GiClockwork } from 'react-icons/gi';
 import { Colors } from '../Navbar/NavbarElements.js';
 import { Link, Switch, Route, Redirect} from 'react-router-dom';
 import { MdClose} from 'react-icons/md';
+import { useRouteMatch } from 'react-router-dom';
 
 export const Background = styled.div`
     width: 100%;
@@ -112,13 +113,14 @@ const ModalNavigator = styled(Link)`
     text-decoration: none;
 `
 
-const CloseModalButton = styled(MdClose)`
+const CloseModalButton = styled(Link)`
     width: 20px;
     height: 20px;
     color: ${Colors.darkGray};
     position: absolute;
     top: 10px;
     right: 15px;
+    text-decoration: none;
     cursor: pointer;
 `
 
@@ -128,11 +130,13 @@ const RecoverMessage = styled.span`
     width: 90%;
 `
 
-const SignModal = ({toggleModal, forget, btnText, navigatorText, change}) => {
+const SignModal = ({toggleModal, forget, btnText, navigatorText, change,url}) => {
 
     return(
         <ModalWrapper >
-            <CloseModalButton onClick={toggleModal}/>
+            <CloseModalButton to={`${url}`} onClick={toggleModal}>
+                <MdClose />
+            </CloseModalButton>
             <LogoDiv>
                 <ClockLogo />
             </LogoDiv>
@@ -147,18 +151,18 @@ const SignModal = ({toggleModal, forget, btnText, navigatorText, change}) => {
                 <SignBtn type="button">
                     {btnText}
                 </SignBtn>
-                {forget ? <ForgetSpan to="/home/recover">
+                {forget ? <ForgetSpan to={`${url}/recover`}>
                     Forgot Password?
                 </ForgetSpan> : null}
             </FormDiv>
-            <ModalNavigator to={`/home/${change}`}>
+            <ModalNavigator to={`${url}/${change}`}>
                 {navigatorText}
             </ModalNavigator>
         </ModalWrapper>
     )
 }
 
-const RecoveryModal = () => {
+const RecoveryModal = ({url}) => {
     return(
     <ModalWrapper>
         <LogoDiv>
@@ -178,7 +182,7 @@ const RecoveryModal = () => {
             Reset Password
         </SignBtn>
         </FormDiv>
-        <ModalNavigator to='/home/sigin'>
+        <ModalNavigator to={`${url}/signin`}>
                 Back
         </ModalNavigator>
     </ModalWrapper>
@@ -202,6 +206,8 @@ const SignInUpModal = ({showModal, toggleModal}) => {
         }
     }
 
+    const { path , url} = useRouteMatch();
+
 
     return (
         <>
@@ -209,10 +215,10 @@ const SignInUpModal = ({showModal, toggleModal}) => {
         <Background ref={modalRef} onClick={closeModal}>
             <animated.div style={animation}>
                 <Switch>
-                    <Route exact path="/home/signin" component={() => <SignModal toggleModal={toggleModal} btnText="Sign In" navigatorText="Sign Up" forget change="signup"/>} />
-                    <Route exact path="/home/signup" component={() => <SignModal toggleModal={toggleModal} btnText="Sign Up" navigatorText="Back" forget={false} change="signin"/>} />
-                    <Route path="/home/recover" component={RecoveryModal} />
-                    <Redirect to="/home/signin" />
+                    <Route exact path={`${url}/signin`} component={() => <SignModal url={url} toggleModal={toggleModal} btnText="Sign In" navigatorText="Sign Up" forget change="signup"/>} />
+                    <Route exact path={`${url}/signup`} component={() => <SignModal url={url} toggleModal={toggleModal} btnText="Sign Up" navigatorText="Back" forget={false} change="signin"/>} />
+                    <Route path={`${url}/recover`} component={() => <RecoveryModal url={url} />} />
+                    <Redirect to={`${url}/signin`} />
                 </Switch>
             </animated.div>
         </Background>

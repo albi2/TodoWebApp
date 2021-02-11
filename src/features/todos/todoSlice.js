@@ -1,4 +1,5 @@
 import { createSlice, createSelector,  createEntityAdapter, current} from '@reduxjs/toolkit';
+import { selectProjects } from '../projects/projectsSlice.js';
 // const initialState = {
 //     status: 'idle',
 //     entities: {
@@ -86,5 +87,21 @@ export const nextId = createSelector(
         ,-1))}
         
 )
+
+export const selectTasksOnType = (type, completed) => {
+    return createSelector(
+        [selectTodos, selectProjects],
+        (todos,projects) => {
+            const isProject = (type !== 'Today' && type !== 'Tomorrow' && type !== 'Upcoming');
+
+            if(isProject){
+                const projectId = Object.values(projects).find(project => project.text === type)?.id;
+                return todos.filter(todo => todo.project === projectId && todo.completed === completed);
+            }
+
+            return todos.filter(todo => todo.type === type && todo.completed === completed);
+        }
+    )
+}
 
 export default todosSlice.reducer;

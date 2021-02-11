@@ -11,7 +11,7 @@ import { RiCalendarCheckLine } from 'react-icons/ri';
 import { TiTick } from 'react-icons/ti';
 import { Popover, PopoverHeader, PopoverBody } from "reactstrap";
 import Calendar from 'react-calendar';
-import { todoAdded , selectTodos,nextId} from '../../features/todos/todoSlice.js';
+import { todoAdded ,nextId} from '../../features/todos/todoSlice.js';
 import {selectProjects,selectProjectById}  from '../../features/projects/projectsSlice.js';
 import 'react-calendar/dist/Calendar.css';
 import './style.css';
@@ -27,7 +27,7 @@ const Bar = styled.div`
     border: 1px solid ${Colors.lighterGray};
     background-color: #fff;
     border-radius: 5px;
-    margin: 20px 0;
+    margin: 20px 0 0 0;
     border: ${({isActive}) => isActive ? '1px solid ' + Colors.themeBlue  : 'none'};
 
 `
@@ -40,7 +40,7 @@ const InputContainer = styled.div`
 `
 
 const Input = styled.input`
-    padding: 11px 64px 11px 8px;
+    padding: 11px 8px 11px 8px;
     border: none;
     width: 100%;
     font-size:1.1rem;
@@ -52,12 +52,12 @@ const Input = styled.input`
     }
 `
 
-const CloseBtn = styled(IoCloseOutline)`
+const CloseBtn = styled.div`
     font-size: 2.2rem;
     color: #505152;
-    display: ${({isDisplayed}) => isDisplayed ? 'block' : 'none'};
+    display: ${({isShowed}) => isShowed ? 'block' : 'none'};
     position: absolute;
-    top: 5px;
+    top: -3px;
     right: 0;
 `
 
@@ -145,10 +145,9 @@ const Tick = styled(TiTick)`
 
 
 const DetailsComponent = function({pomodoros, setPomodoros,categoriesIcons,
-    chosenCategory,setCategory, dateValue, onDateChange, chosenMenu, chosenProject,
-    setChosenProject}) {
+    chosenCategory,setCategory, dateValue, onDateChange, chosenProject,
+    setChosenProject, projects,chosenMenu}) {
     const [popoverOpen, setPopoverOpen] = useState(false);
-    const projects = useSelector(selectProjects);
     const toggle = () => setPopoverOpen(!popoverOpen);
 
 
@@ -242,7 +241,33 @@ const DetailsComponent = function({pomodoros, setPomodoros,categoriesIcons,
 const InputComponent = forwardRef(({inputFocused, setInputFocused, pomodoros, setPomodoros,chosenMenu},ref) => {
     const [isCloseDisplayed, setCloseBtn] = useState(false);
     const [taskName, setTaskName] = useState('');
-    const [chosenCategory, setCategory] = useState(0);
+    
+    const categoriesIcons = [
+        {
+        text: 'Today',
+        icon: <BiSun />,
+        color: '#44a336'
+        },
+        {
+        text: 'Tomorrow',
+        icon: <WiSunset />,
+        color: '#e0881b'
+        },
+        {
+        text: 'Upcoming',
+        icon: <RiCalendarCheckLine />,
+        color: Colors.themeBlue 
+        }
+    ];
+
+
+    const [chosenCategory, setCategory] = useState(categoriesIcons.reduce(
+        (index, el, i) => {
+            if(el.text === chosenMenu)
+                return i;
+            return index;
+        },0
+    ));
 
     const projects = useSelector(selectProjects);
     const currProject = Object.values(projects).find(proj => proj.text === chosenMenu);
@@ -250,20 +275,6 @@ const InputComponent = forwardRef(({inputFocused, setInputFocused, pomodoros, se
     const [theChosenProject, setChosenProject] = useState(currProject?.id ?? 1);
     const [dateValue, onDateChange] = useState(new Date());
 
-    const categoriesIcons = [
-    {
-    icon: <BiSun />,
-    color: '#44a336'
-    },
-    {
-    icon: <WiSunset />,
-    color: '#e0881b'
-    },
-    {
-    icon: <RiCalendarCheckLine />,
-     color: Colors.themeBlue 
-    }
-    ];
 
     const handleChange = function(e){
         setTaskName(() => e.target.value);
@@ -282,33 +293,36 @@ const InputComponent = forwardRef(({inputFocused, setInputFocused, pomodoros, se
     const addProject = function(e) {
         const text = e.target.value.trim();
 
-        if(e.which === 13 && text){
+        if(e.which === 13 && text && inputFocused){
             dispatch(todoAdded(next,text,theChosenProject,false,
-            dateValue.toISOString(),false,1,pomodoros,chosenCategory));
+            dateValue.toISOString(),false,1,pomodoros,categoriesIcons[chosenCategory].text));
             setTaskName('');
+            setCloseBtn(() => false);
         }
     }
 
     return (
         <Bar  isActive={inputFocused}>
             <InputContainer>
-                <Input ref={ref} type="text" onK
+                <Input ref={ref} type="text"
                 placeholder={`Add a task to "${currProject?.text ?? projects[0]?.text} Project To Do App" [Enter] to save`}
                 name="task" value={taskName}  onChange={handleChange}  
                 onFocus={() => setInputFocused(() => true)}
                 onKeyDown = {addProject}/>
-                <CloseBtn isDisplayed={isCloseDisplayed} onClick={handleCloseBtn}
-               />
+                <CloseBtn isShowed={isCloseDisplayed} onClick={handleCloseBtn}>
+                    <IoCloseOutline />
+                </CloseBtn>
             </InputContainer>
-            <DetailsComponent pomodoros={pomodoros} setPomodoros={setPomodoros} 
+            <DetailsComponent  chosenMenu={chosenMenu} pomodoros={pomodoros} setPomodoros={setPomodoros} 
             categoriesIcons={categoriesIcons}
             chosenCategory={chosenCategory}
             setCategory={setCategory}
             dateValue={dateValue}
             onDateChange={onDateChange} 
-            chosenMenu={chosenMenu}
             chosenProject={theChosenProject}
-            setChosenProject={setChosenProject} />
+            setChosenProject={setChosenProject} 
+            projects={projects}
+           />
         </Bar>
     )
 });
