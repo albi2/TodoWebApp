@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-# Todo Web App
-=======
 
 # Todo Web App 
->>>>>>> da746504ec03705716a44bad23198848781e95ae
 
 A todo website built with react and redux to help you track your daily tasks using the pomodoro technique.
 
@@ -42,7 +38,6 @@ yarn start
 * React-Spring effects
 * React Components
 * Timer 
->>>>>>> da746504ec03705716a44bad23198848781e95ae
 
 ### Folder Structure
 
@@ -80,19 +75,15 @@ yarn start
 ```
 
 ## Tasks
-<<<<<<< HEAD
 - [X] Add to do items
 =======
 - [ ] Add to do items
->>>>>>> da746504ec03705716a44bad23198848781e95ae
   - [ ] Add sidebar that appears when items is clicked
 - [ ] Add map functionality for user to specify places where he wants to study
 - [ ] Add react-spring effect
 - [ ] Add timer using react-compound-timer package
-<<<<<<< HEAD
 - [X] Make todos appear based on chosen menu
 - [X] Add statsbar functionality
 - [ ] Add sorting of todos based on priority,duedate or randomly
 =======
 
->>>>>>> da746504ec03705716a44bad23198848781e95ae
