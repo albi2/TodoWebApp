@@ -20,7 +20,7 @@ const Body = () => {
     return (
 
             <BodyContainer onClick={handleClick}>
-                <StatsBar />
+                <StatsBar chosenMenu={menu} />
                 <InputComponent ref={ref} inputFocused={inputFocused} 
                 setInputFocused={setInputFocused} 
                 pomodoros={pomodoros}

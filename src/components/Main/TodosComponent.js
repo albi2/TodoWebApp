@@ -108,11 +108,11 @@ const formatDate = function(date, locale = 'en-US'){
     }).format(date);
 }
 
-const DisplayTodos = function({todos, displayTick, completed}){
+const DisplayTodos = function({todos, displayTick}){
     const dispatch = useDispatch();
     return(
         todos.map((todo,i) => {
-            return (todo.completed === completed? 
+            return (
             <TodoItem key={i+1}>
                 <ButtonTextDiv>
                     <ButtonDiv>
@@ -133,9 +133,9 @@ const DisplayTodos = function({todos, displayTick, completed}){
                     </ItemText>
                 </ButtonTextDiv>
                 <DateInfo>
-                    {formatDate(new Date(todo.dueDate))}
+                   {todo.dueDate ?  formatDate(new Date(todo.dueDate)) : null}
                 </DateInfo>
-            </TodoItem> : null)
+            </TodoItem>)
         })
     )
 }
@@ -150,7 +150,7 @@ const TodosComponent = ({chosenMenu}) => {
 
     return (
         <TodosBox>
-            <DisplayTodos todos={uncompletedTodos}  displayTick={false} completed={false}/>
+            <DisplayTodos todos={uncompletedTodos}  displayTick={false} />
             <ShowCompletedBtn onClick={() => setShowCompleted(!showCompletedTasks)}>
                 {
                     showCompletedTasks ? 'Hide Completed Tasks' : 'Show Completed Tasks'
@@ -158,7 +158,7 @@ const TodosComponent = ({chosenMenu}) => {
             </ShowCompletedBtn>
             {
                 showCompletedTasks ?
-                <DisplayTodos todos={completedTodos} displayTick={true} completed={true}/> : null
+                <DisplayTodos todos={completedTodos} displayTick={true} /> : null
             }
         </TodosBox>
     )

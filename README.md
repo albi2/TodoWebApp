@@ -83,3 +83,5 @@ yarn start
 - [X] Add statsbar functionality
 - [ ] Add sorting of todos based on priority,duedate or randomly
 
+## Demo
+![](./images/photo_1.png)

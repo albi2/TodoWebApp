@@ -273,7 +273,11 @@ const InputComponent = forwardRef(({inputFocused, setInputFocused, pomodoros, se
     const currProject = Object.values(projects).find(proj => proj.text === chosenMenu);
 
     const [theChosenProject, setChosenProject] = useState(currProject?.id ?? 1);
-    const [dateValue, onDateChange] = useState(new Date());
+
+    let startingDate = new Date();
+    if(chosenMenu === 'Tomorrow') startingDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+    if(chosenMenu === 'Upcoming') startingDate = 0;
+    const [dateValue, onDateChange] = useState(startingDate);
 
 
     const handleChange = function(e){
@@ -295,7 +299,7 @@ const InputComponent = forwardRef(({inputFocused, setInputFocused, pomodoros, se
 
         if(e.which === 13 && text && inputFocused){
             dispatch(todoAdded(next,text,theChosenProject,false,
-            dateValue.toISOString(),false,1,pomodoros,categoriesIcons[chosenCategory].text));
+            dateValue && dateValue.toISOString(),false,1,pomodoros,categoriesIcons[chosenCategory].text));
             setTaskName('');
             setCloseBtn(() => false);
         }
@@ -305,7 +309,7 @@ const InputComponent = forwardRef(({inputFocused, setInputFocused, pomodoros, se
         <Bar  isActive={inputFocused}>
             <InputContainer>
                 <Input ref={ref} type="text"
-                placeholder={`Add a task to "${currProject?.text ?? projects[0]?.text} Project To Do App" [Enter] to save`}
+                placeholder={`Add a task to "${useSelector(state=> selectProjectById(state,theChosenProject))?.text ?? projects[0]?.text} Project To Do App" [Enter] to save`}
                 name="task" value={taskName}  onChange={handleChange}  
                 onFocus={() => setInputFocused(() => true)}
                 onKeyDown = {addProject}/>
