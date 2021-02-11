@@ -4,7 +4,6 @@
 A todo website built with react and redux to help you track your daily tasks using the pomodoro technique.
 
 ## How To Run
-<<<<<<< HEAD
 
 - Clone the repository
 - Install dependencies
@@ -22,7 +21,6 @@ yarn start
 - React-Spring effects
 - React Components
 - Timer
-=======
  * Clone the repository
  * Install dependencies
  * Run the project
@@ -76,7 +74,6 @@ yarn start
 
 ## Tasks
 - [X] Add to do items
-=======
 - [ ] Add to do items
   - [ ] Add sidebar that appears when items is clicked
 - [ ] Add map functionality for user to specify places where he wants to study
@@ -85,5 +82,4 @@ yarn start
 - [X] Make todos appear based on chosen menu
 - [X] Add statsbar functionality
 - [ ] Add sorting of todos based on priority,duedate or randomly
-=======
 
