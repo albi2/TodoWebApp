@@ -45,6 +45,7 @@ const StatsBar = ({chosenMenu}) => {
         sum += todo.pomodoros;
         return sum;
     },0) * 25 / 60.0;
+    
     return (
         <Bar>
             <ItemBox>

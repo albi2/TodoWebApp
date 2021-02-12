@@ -5,7 +5,7 @@ import InputComponent from './InputComponent.js';
 import {useParams} from 'react-router-dom';
 import TodosComponent from './TodosComponent.js';
 
-const Body = () => {
+const Body = ({setRunningProject, setMinimization}) => {
     const {menu} = useParams();
     const [inputFocused, setInputFocused] = useState(false);
     const [pomodoros, setPomodoros] = useState(0);
@@ -27,7 +27,9 @@ const Body = () => {
                 setPomodoros={setPomodoros}
                 chosenMenu={menu}
                 />
-                <TodosComponent chosenMenu={menu}/>
+                <TodosComponent chosenMenu={menu}
+                 setRunningProject={setRunningProject}
+                 setMinimization={setMinimization}/>
             </BodyContainer>
     )
 }

@@ -27,14 +27,14 @@ const TodoItem = styled.div`
     margin-top: 8px;
 `
 
-const ButtonTextDiv = styled.div`
+export const ButtonTextDiv = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
 `
 
-const ButtonDiv = styled.div`
+export const ButtonDiv = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -43,15 +43,16 @@ const ButtonDiv = styled.div`
     position: relative;
 `
 
-const Button = styled.button`
+export const Button = styled.button`
     border: 1px solid ${Colors.mixGray};
     border-radius: 50%;
     background-color: #fff;
     width: 20px;
     height: 20px;
+    cursor: pointer;
 `
 
-const TickDiv = styled.div`
+export const TickDiv = styled.div`
     font-size: 0.9rem;
     color: ${Colors.mixGray};
     display: ${({isDisplayed}) => isDisplayed ? 'block' : 'none'};
@@ -61,25 +62,25 @@ const TickDiv = styled.div`
     cursor: pointer;
 `
 
-const Play = styled(BsPlay)`
+export const Play = styled(BsPlay)`
     color: ${Colors.mixGray};
     font-size: 1.3rem;
     position: absolute;
     left: 19.8%;
 `
 
-const ItemText = styled.span`
+export const ItemText = styled.span`
     margin-left: 16px;
     color: ${Colors.darkGray};
     font-size: 1.1rem;
 `
 
-const DateInfo = styled.span`
+export const DateInfo = styled.span`
     color: ${Colors.themeBlue};
     font-size: 0.9rem;
 `
 
-const ShowCompletedBtn = styled.button`
+export const ShowCompletedBtn = styled.button`
     margin: 20px 0;
     border: none;
     color: #fff;
@@ -89,7 +90,7 @@ const ShowCompletedBtn = styled.button`
     border-radius: 3px;
 `
 
-const formatDate = function(date, locale = 'en-US'){
+export const formatDate = function(date, locale = 'en-US'){
     const calcDaysPassed = (date1, date2) => {
         // Kthehet ne ms
         return Math.floor((date1-date2) / (24 * 60 * 60 * 1000));
@@ -108,7 +109,7 @@ const formatDate = function(date, locale = 'en-US'){
     }).format(date);
 }
 
-const DisplayTodos = function({todos, displayTick}){
+const DisplayTodos = function({todos, displayTick,setRunningProject, setMinimization}){
     const dispatch = useDispatch();
     return(
         todos.map((todo,i) => {
@@ -118,6 +119,7 @@ const DisplayTodos = function({todos, displayTick}){
                     <ButtonDiv>
                         <Button onClick={() => {
                             dispatch(todoToggled(todo.id));
+                            setRunningProject(0);
                         }}/>
                         <TickDiv onClick={() => {
                             dispatch(todoToggled(todo.id))}} isDisplayed={displayTick} >
@@ -126,7 +128,10 @@ const DisplayTodos = function({todos, displayTick}){
                     </ButtonDiv>
                     <ButtonDiv>
                         <Button />
-                        <Play />
+                        <Play onClick={() => {
+                            setRunningProject(todo.id);
+                            setMinimization(false);
+                        }}/>
                     </ButtonDiv>
                     <ItemText>
                         {todo.text}
@@ -140,7 +145,7 @@ const DisplayTodos = function({todos, displayTick}){
     )
 }
 
-const TodosComponent = ({chosenMenu}) => {
+const TodosComponent = ({chosenMenu, setRunningProject, setMinimization}) => {
     const todos = useSelector(selectTodos);
     console.log(todos);
     const [showCompletedTasks, setShowCompleted] = useState(false);
@@ -150,7 +155,9 @@ const TodosComponent = ({chosenMenu}) => {
 
     return (
         <TodosBox>
-            <DisplayTodos todos={uncompletedTodos}  displayTick={false} />
+            <DisplayTodos todos={uncompletedTodos}  displayTick={false} 
+            setRunningProject={setRunningProject} 
+            setMinimization={setMinimization}/>
             <ShowCompletedBtn onClick={() => setShowCompleted(!showCompletedTasks)}>
                 {
                     showCompletedTasks ? 'Hide Completed Tasks' : 'Show Completed Tasks'

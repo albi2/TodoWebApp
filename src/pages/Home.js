@@ -8,6 +8,8 @@ import { Colors } from '../components/Navbar/NavbarElements.js';
 import ProjectModal from '../components/Modals/AddProjectModal.js';
 import Body from '../components/Main/index.js'; 
 import { Route, Switch,Redirect, useRouteMatch } from 'react-router-dom';
+import TimerComponent from '../components/Timer/TimerComponent.js';
+
 const HomeContainer = styled.div`
     position: relative;
 `
@@ -55,8 +57,15 @@ const Home = () => {
         setDefaultProject(() => id);
         toggleSelectedProject(id);
     });
+
+    const [isMinimized, setMinimization] = useState(true);
+    const [currentRunningTodo, setRunningProject] = useState(0);
     
     const {path, url} = useRouteMatch();
+
+    const time = new Date();
+    time.setSeconds(time.getSeconds() + 50 * 60);
+
     return (
         <HomeContainer onClick={changeProjectPopup}>
             <Navbar toggleModal={toggleModal} />
@@ -64,7 +73,9 @@ const Home = () => {
                 <Sidebar  togglePopup={changeProjectPopup} toggleProjectModal={toggleAddProject} 
                 />
                 <Switch>
-                    <Route  path={`${url}/:menu`} component={() => <Body />} />
+                    <Route  path={`${url}/:menu`} component={() => <Body
+                    setRunningProject={setRunningProject}
+                    setMinimization={setMinimization}/>} />
                     <Redirect to={`${path}/Today`} />
                 </Switch>
             </BodyContainer>
@@ -77,6 +88,10 @@ const Home = () => {
             <ProjectModal isProjectModalOpen={showEditProject} 
             toggleProjectModal={toggleEditProject} toAdd={false}
              defaultProject={defaultProject} setDefaultProject={setDefaultProject}/>
+            {currentRunningTodo ? <TimerComponent expiryTimestamp={time} isMinimized={isMinimized} 
+                setMinimization={setMinimization} 
+                currentRunningTodo={currentRunningTodo}
+                setRunningProject={setRunningProject}/> : null}
         </HomeContainer>
     )
 }

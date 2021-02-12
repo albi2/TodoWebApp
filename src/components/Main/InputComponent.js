@@ -101,6 +101,7 @@ const DateButton = styled.button`
     &:focus{
         outline: none;
     }
+    cursor: pointer;
 `
 
 const Header = styled.div`
@@ -141,6 +142,7 @@ const Tick = styled(TiTick)`
     margin-left: auto;
     margin-top: -5px;
     color: ${Colors.darkGray};
+    cursor: pointer;
 `
 
 
