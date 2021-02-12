@@ -62,10 +62,11 @@ yarn start
 - [X] Add to do items
   - [ ] Add sidebar that appears when items is clicked
 - [ ] Add map functionality for user to specify places where he wants to study
-- [ ] Add react-spring effect
-- [ ] Add timer using react-compound-timer package
+- [X] Add react-spring effect
+- [X] Add timer using react-compound-timer package
 - [X] Make todos appear based on chosen menu
 - [X] Add statsbar functionality
+- [X] Add timer
 - [ ] Add sorting of todos based on priority,duedate or randomly
 
 ## Demo
