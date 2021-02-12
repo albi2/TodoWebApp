@@ -50,7 +50,6 @@ yarn start
 │   │   ├── projects
 │   │   ├── sessions
 │   │   └── todos
-│   ├── images
 │   ├── index.css
 │   ├── index.js
 │   └── pages
