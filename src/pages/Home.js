@@ -66,12 +66,14 @@ const Home = () => {
     const time = new Date();
     time.setSeconds(time.getSeconds() + 50 * 60);
 
+    const [currentMenu, setCurrentMenu] = useState('Today');
+
     return (
         <HomeContainer onClick={changeProjectPopup}>
             <Navbar toggleModal={toggleModal} />
             <BodyContainer>
                 <Sidebar  togglePopup={changeProjectPopup} toggleProjectModal={toggleAddProject} 
-                />
+                currentMenu={currentMenu} setCurrentMenu={setCurrentMenu} />
                 <Switch>
                     <Route  path={`${url}/:menu`} component={() => <Body
                     setRunningProject={setRunningProject}
@@ -79,7 +81,8 @@ const Home = () => {
                     <Redirect to={`${path}/Today`} />
                 </Switch>
             </BodyContainer>
-            <SignModal showModal={showSignModal} toggleModal={toggleModal}/>
+            <SignModal showModal={showSignModal} toggleModal={toggleModal}
+            currentMenu={currentMenu}/>
             <ProjectPopup isPopupOpen={isProjectPopupOpen} xPos={xPos} yPos={yPos} 
             selectedContextProject={selectedContextProject} 
             toggleEditProject={toggleEditProject} />

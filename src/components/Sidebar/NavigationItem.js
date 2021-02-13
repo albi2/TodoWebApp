@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Colors } from '../Navbar/NavbarElements.js';
-import { useRouteMatch } from 'react-router-dom';
+import { useRouteMatch, useParams } from 'react-router-dom';
 
 // const ItemBox = styled.div`
 //     display: flex;
@@ -20,10 +20,8 @@ const ItemBox = styled(Link)`
     width: 100%;
     text-decoration: none;
     margin-top: 10px;
-    &.active{
-        background-color: 
-    }
-
+    background-color: ${({active}) => active ? Colors.lightGray : '#fff'};
+    border-radius: 7px;
 `
 
 const IconDiv = styled.div`
@@ -52,11 +50,15 @@ const InfoItem = styled.span`
     text-wrap: nowrap;
 `
 
-const NavigationItem = ({icon, itemName, hours, noItems, togglePopup,id}) => {
+const NavigationItem = ({icon, itemName, hours, noItems, togglePopup,id, currentMenu, setCurrentMenu}) => {
     const { path,url} = useRouteMatch();
+
+
     return (
         <ItemBox to={`${url}/${itemName}`} 
-         onContextMenu={togglePopup} id={id}>
+         onContextMenu={togglePopup} id={id}
+         onClick={() => setCurrentMenu(itemName)}
+         active={currentMenu === itemName}>
             <IconDiv>
                 {icon}
                 <IconDesc>

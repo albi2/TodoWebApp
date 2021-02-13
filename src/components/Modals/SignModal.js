@@ -7,7 +7,7 @@ import { Link, Switch, Route, Redirect} from 'react-router-dom';
 import { MdClose} from 'react-icons/md';
 import { useRouteMatch } from 'react-router-dom';
 
-export const Background = styled.div`
+export const Background = styled(Link)`
     width: 100%;
     height: 100%;
     background: rgba(0,0,0,0.8);
@@ -18,6 +18,7 @@ export const Background = styled.div`
     align-items: center;
     justify-content: center;
     z-index: 5;
+    text-decoration: none;
 `
 
 const ModalWrapper = styled.div`
@@ -134,7 +135,7 @@ const SignModal = ({toggleModal, forget, btnText, navigatorText, change,url}) =>
 
     return(
         <ModalWrapper >
-            <CloseModalButton to={`${url}`} onClick={toggleModal}>
+            <CloseModalButton to={`${url}/Today`} onClick={toggleModal}>
                 <MdClose />
             </CloseModalButton>
             <LogoDiv>
@@ -189,7 +190,7 @@ const RecoveryModal = ({url}) => {
     )
 }
 
-const SignInUpModal = ({showModal, toggleModal}) => {
+const SignInUpModal = ({showModal, toggleModal,currentMenu}) => {
     const modalRef = useRef();
 
     const animation = useSpring({
@@ -207,23 +208,23 @@ const SignInUpModal = ({showModal, toggleModal}) => {
     }
 
     const { path , url} = useRouteMatch();
-
+    console.log(url,path);
 
     return (
         <>
-        {showModal ? 
-        <Background ref={modalRef} onClick={closeModal}>
-            <animated.div style={animation}>
-                <Switch>
-                    <Route exact path={`${url}/signin`} component={() => <SignModal url={url} toggleModal={toggleModal} btnText="Sign In" navigatorText="Sign Up" forget change="signup"/>} />
-                    <Route exact path={`${url}/signup`} component={() => <SignModal url={url} toggleModal={toggleModal} btnText="Sign Up" navigatorText="Back" forget={false} change="signin"/>} />
-                    <Route path={`${url}/recover`} component={() => <RecoveryModal url={url} />} />
-                    <Redirect to={`${url}/signin`} />
-                </Switch>
-            </animated.div>
-        </Background>
-        : 
-        null}
+            {showModal ? 
+            <Background ref={modalRef} onClick={closeModal} to={`${url}/${currentMenu}`}>
+                <animated.div style={animation}>
+                    <Switch>
+                        <Route exact path={`${url}/signin`} component={() => <SignModal url={url} toggleModal={toggleModal} btnText="Sign In" navigatorText="Sign Up" forget change="signup"/>} />
+                        <Route exact path={`${url}/signup`} component={() => <SignModal url={url} toggleModal={toggleModal} btnText="Sign Up" navigatorText="Back" forget={false} change="signin"/>} />
+                        <Route path={`${url}/recover`} component={() => <RecoveryModal url={url} />} />
+                        <Redirect to={`${url}/signin`} />
+                    </Switch>
+                </animated.div>
+            </Background>
+            : 
+            null}
         </>
     )
 }

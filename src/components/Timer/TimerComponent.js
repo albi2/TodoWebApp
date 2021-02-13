@@ -61,13 +61,7 @@ const TimerComponent = ({expiryTimestamp, isMinimized, setMinimization,setRunnin
                             <AiOutlineCheck />
                         </TickDiv>
                     </BDiv>
-                    <BDiv>
-                        <Button />
-                        <Play onClick={() => {
-                            setRunningProject(currentTodo.id);
-                            setMinimization(false);
-                        }}/>
-                    </BDiv>
+                   
                     <ItemText>
                         {currentTodo.text}
                     </ItemText>

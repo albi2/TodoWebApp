@@ -11,7 +11,7 @@ import NavigationItem from './NavigationItem';
 import { useSelector } from 'react-redux';
 import { selectProjects } from '../../features/projects/projectsSlice.js';
 
-const Projects = ({projects, togglePopup, toggleProjectModal}) => {
+const Projects = ({projects, togglePopup, toggleProjectModal, currentMenu, setCurrentMenu}) => {
 
             return(projects.length !== 0 ?<ProjectsNav>
                 {
@@ -26,7 +26,7 @@ const Projects = ({projects, togglePopup, toggleProjectModal}) => {
                             itemName={project.text}    
                             hours={0}
                             noItems={0}
-                        /> : null
+                            currentMenu={currentMenu} setCurrentMenu={setCurrentMenu} /> : null
                     )
                 }
                 <ProjectButton onClick={toggleProjectModal}>
@@ -39,7 +39,7 @@ const Projects = ({projects, togglePopup, toggleProjectModal}) => {
             </ProjectsNav> : null)
 }
 
-export const Sidebar = ({togglePopup, toggleProjectModal}) => {
+export const Sidebar = ({togglePopup, toggleProjectModal,currentMenu, setCurrentMenu}) => {
     const projects = useSelector(selectProjects);
     // Hours and number of todos have to be calculated dynamically
     // Add it later after making sure everything is in place
@@ -50,20 +50,24 @@ export const Sidebar = ({togglePopup, toggleProjectModal}) => {
                     <ItemIcon color="#44a336">
                         {<BiSun />}
                     </ItemIcon>
-                } itemName="Today" hours={2} noItems={1}/>
+                } itemName="Today" hours={2} noItems={1} 
+                currentMenu={currentMenu} setCurrentMenu={setCurrentMenu}/>
                  <NavigationItem icon={
                     <ItemIcon color="#e0881b">
                         {<WiSunset />}
                     </ItemIcon>
-                } itemName="Tomorrow" hours={0} noItems={0}/>
+                } itemName="Tomorrow" hours={0} noItems={0}
+                currentMenu={currentMenu} setCurrentMenu={setCurrentMenu}/>
                  <NavigationItem icon={
                     <ItemIcon color={Colors.themeBlue}>
                         {<RiCalendarCheckLine />}
                     </ItemIcon>
-                } itemName="Upcoming" hours={0} noItems={0}/>
+                } itemName="Upcoming" hours={0} noItems={0}
+                currentMenu={currentMenu} setCurrentMenu={setCurrentMenu}/>
             </ChronoNav>
             <Projects projects={projects} togglePopup={togglePopup} 
-            toggleProjectModal={toggleProjectModal}/>
+            toggleProjectModal={toggleProjectModal} 
+            currentMenu={currentMenu} setCurrentMenu={setCurrentMenu}/>
         </SidebarContainer>
     )
 }

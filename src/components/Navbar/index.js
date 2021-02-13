@@ -8,7 +8,7 @@ import {useRouteMatch} from 'react-router-dom';
 
 const Navbar = ({toggleModal}) => {
     const {path, url} = useRouteMatch();
-
+    console.log(url);
     return (
         <>
             <Nav>

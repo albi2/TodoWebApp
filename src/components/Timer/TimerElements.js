@@ -73,6 +73,7 @@ export const TimerContainer = styled(motion.div)`
     align-items: center;
     justify-content: center;
     borderRadius: '5px';
+    box-sizing: border-box;
 `
 
 export const Minimize = styled(motion.div)`
@@ -101,6 +102,7 @@ export const ButtonDiv = styled(motion.div)`
     align-items: center;
     justify-content: center;
     width: 20%;
+    margin-top: 40px;
 `
 
 export const ButtonContainer = styled.div`
