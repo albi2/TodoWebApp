@@ -1,6 +1,6 @@
-import React,{useState} from 'react'
-import { useSelector,useDispatch } from 'react-redux';
-import { selectTodos,selectTasksOnType, todoToggled } from '../../features/todos/todoSlice.js';
+import React,{ useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { selectTodos, selectTasksOnType, todoToggled } from '../../features/todos/todoSlice.js';
 import styled from 'styled-components';
 import { Colors } from '../Navbar/NavbarElements.js';
 import { AiOutlineCheck } from 'react-icons/ai';

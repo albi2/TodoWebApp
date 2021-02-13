@@ -44,6 +44,7 @@ export const NavSignInUp = styled(Link)`
     align-items: center;
     cursor: pointer;
     text-decoration: none;
+    
 `
 
 export const NavUserIcon = styled(FaUserCircle)`
