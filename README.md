@@ -9,7 +9,7 @@ A todo website built with react and redux to help you track your daily tasks usi
 - Run the project
 
 ```
-git clone https://github.com/Artemis-12/Todo-Webapp/tree/master
+git clone https://github.com/albi2/TodoWebApp
 npm install
 yarn start
 ```
